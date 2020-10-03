@@ -1,10 +1,11 @@
 import React from "react";
 /** @jsx jsx */
-import { jsx, Box, Flex } from "theme-ui";
+import { jsx, Box } from "theme-ui";
 import _range from "lodash.range";
 import { CELL_WIDTH, COLUMN_HEIGHT, ROW_LENGTH } from "../constants";
 import Cell from "./Cell";
 import CellLayer from "./CellLayer";
+import Piece from "./Piece";
 
 export interface LoopWindowProps {}
 
@@ -39,32 +40,8 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
           />
         )}
       />
-      <CellLayer
-        cells={[17, 18, 19, 31].map(n => ({
-          slot: n
-        }))}
-        renderCell={({ slot }) => (
-          <Cell
-            slot={slot}
-            sx={{
-              bg: "primary"
-            }}
-          />
-        )}
-      />
-      <CellLayer
-        cells={[1, 13, 25, 14, 26].map(n => ({
-          slot: n
-        }))}
-        renderCell={({ slot }) => (
-          <Cell
-            slot={slot}
-            sx={{
-              bg: "secondary"
-            }}
-          />
-        )}
-      />
+      <Piece slots={[17, 18, 19, 31]} color="primary" />
+      <Piece slots={[1, 13, 25, 14, 26]} color="secondary" />
     </Box>
   );
 };
