@@ -14,10 +14,13 @@ const Cell: React.FC<CellProps> = props => {
       sx={{
         width,
         height: width,
-        bg: "primary",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor: "text",
+        borderStyle: "dashed",
+        opacity: 0.5
       }}
     >
       <Text>{props.id}</Text>

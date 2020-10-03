@@ -4,7 +4,7 @@ import { CELL_WIDTH } from "./constants";
 
 export default merge(preset, {
   colors: {
-    background: "#f6f6f6"
+    // background: "#f6f6f6"
   },
   sizes: {
     cellWidth: CELL_WIDTH
