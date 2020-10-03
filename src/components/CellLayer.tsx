@@ -1,7 +1,7 @@
 import React from "react";
 /** @jsx jsx */
 import { jsx, Box } from "theme-ui";
-import { CELL_WIDTH, COLUMN_HEIGHT, ROW_LENGTH } from "../constants";
+import { CELL_WIDTH, ROW_LENGTH } from "../constants";
 
 export interface CellData {
   slot: number;
