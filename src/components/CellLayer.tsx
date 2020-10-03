@@ -16,7 +16,7 @@ const CellLayer: React.FC<CellLayerProps> = props => {
   const { cells, renderCell } = props;
 
   return (
-    <Box sx={{ width: "100%", height: "100%", position: "absolute" }}>
+    <Box sx={{ position: "absolute" }}>
       {cells.map(cellData => {
         const { slot } = cellData;
         const y = Math.floor(slot / ROW_LENGTH);
