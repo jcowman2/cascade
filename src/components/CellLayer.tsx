@@ -11,6 +11,7 @@ export interface CellLayerProps {
 
 const CellLayer: React.FC<CellLayerProps> = props => {
   const { cells, renderCell } = props;
+  console.log("re-rendering");
 
   return (
     <Box sx={{ position: "absolute" }}>
@@ -37,4 +38,4 @@ const CellLayer: React.FC<CellLayerProps> = props => {
   );
 };
 
-export default CellLayer;
+export default React.memo(CellLayer);
