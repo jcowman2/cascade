@@ -1,7 +1,7 @@
 import React from "react";
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { useDrag } from "react-dnd";
+import { DragPreviewImage, useDrag } from "react-dnd";
 import CellLayer from "./CellLayer";
 import Cell from "./Cell";
 import { ItemTypes } from "../constants";
@@ -14,7 +14,7 @@ export interface PieceProps {
 const Piece: React.FC<PieceProps> = props => {
   const { slots, color } = props;
 
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag({
     item: { type: ItemTypes.Piece },
     collect: monitor => ({
       isDragging: !!monitor.isDragging()
@@ -22,20 +22,26 @@ const Piece: React.FC<PieceProps> = props => {
   });
 
   return (
-    <div
-      ref={drag}
-      sx={{
-        cursor: "move",
-        position: "absolute"
-      }}
-    >
-      <CellLayer
-        cells={slots.map(slot => ({ slot }))}
-        renderCell={({ slot }) => (
-          <Cell slot={slot} sx={{ bg: color, opacity: isDragging ? 0 : 1 }} />
-        )}
+    <React.Fragment>
+      <DragPreviewImage
+        connect={preview}
+        src={`https://avatars0.githubusercontent.com/u/21223537?s=460&u=03e0e1d38032b1a8bf9561643588e35f498856e5&v=4`}
       />
-    </div>
+      <div
+        ref={drag}
+        sx={{
+          cursor: "move",
+          position: "absolute"
+        }}
+      >
+        <CellLayer
+          cells={slots.map(slot => ({ slot }))}
+          renderCell={({ slot }) => (
+            <Cell slot={slot} sx={{ bg: color, opacity: isDragging ? 0 : 1 }} />
+          )}
+        />
+      </div>
+    </React.Fragment>
   );
 };
 
