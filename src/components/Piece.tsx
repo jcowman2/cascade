@@ -1,8 +1,7 @@
 import React from "react";
+import { useDrag } from "react-dnd";
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { DragPreviewImage, useDrag, useDragLayer } from "react-dnd";
-import DomToImage from "dom-to-image";
 import CellLayer from "./CellLayer";
 import Cell from "./Cell";
 import { ItemTypes } from "../constants";
@@ -15,6 +14,7 @@ export interface PieceProps {
 
 const Piece: React.FC<PieceProps> = props => {
   const { slots, color } = props;
+  console.log("piece rendering", color);
 
   const [{ isDragging }, drag, preview] = useDrag({
     item: { type: ItemTypes.Piece, slots, color },

@@ -2,7 +2,12 @@ import React from "react";
 import { XYCoord } from "react-dnd";
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { CELL_WIDTH, COLUMN_HEIGHT, ROW_LENGTH } from "../constants";
+import {
+  CELL_WIDTH,
+  COLUMN_HEIGHT,
+  PIECE_PREVIEW_OFFSET,
+  ROW_LENGTH
+} from "../constants";
 import { PieceData } from "../types/game";
 import Cell from "./Cell";
 import CellLayer from "./CellLayer";
@@ -38,8 +43,8 @@ const PiecePreview: React.FC<PiecePreviewProps> = props => {
     <div
       sx={{
         position: "fixed",
-        top: offset.y - yFromCursor,
-        left: offset.x - xFromCursor
+        top: offset.y - yFromCursor + PIECE_PREVIEW_OFFSET,
+        left: offset.x - xFromCursor + PIECE_PREVIEW_OFFSET
       }}
     >
       <CellLayer cells={cells} renderCell={renderCell} />
