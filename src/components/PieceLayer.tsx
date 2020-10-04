@@ -23,6 +23,7 @@ const PieceLayer: React.FC<PieceLayerProps> = props => {
       pieces.map(piece => (
         <Piece
           key={piece.id}
+          id={piece.id}
           slots={piece.slots}
           color={piece.color ?? "text"}
         />

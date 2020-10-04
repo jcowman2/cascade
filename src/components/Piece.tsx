@@ -6,15 +6,12 @@ import CellLayer from "./CellLayer";
 import Cell from "./Cell";
 import { ItemTypes } from "../constants";
 import { getEmptyImage } from "react-dnd-html5-backend";
+import { PieceData } from "../types/game";
 
-export interface PieceProps {
-  slots: number[];
-  color: string;
-}
+export interface PieceProps extends PieceData {}
 
 const Piece: React.FC<PieceProps> = props => {
   const { slots, color } = props;
-  console.log("piece rendering", color);
 
   const [{ isDragging }, drag, preview] = useDrag({
     item: { type: ItemTypes.Piece, slots, color },
