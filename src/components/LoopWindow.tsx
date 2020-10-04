@@ -7,12 +7,17 @@ import Cell from "./Cell";
 import CellLayer from "./CellLayer";
 import PieceLayer from "./PieceLayer";
 import { usePieceControls } from "../hooks/pieceControls";
+import DropLayer from "./DropLayer";
 
 export interface LoopWindowProps {}
 
 const LoopWindow: React.FC<LoopWindowProps> = props => {
   const width = CELL_WIDTH * ROW_LENGTH;
   const height = CELL_WIDTH * COLUMN_HEIGHT;
+
+  const boardCells = _range(0, ROW_LENGTH * COLUMN_HEIGHT).map(n => ({
+    slot: n
+  }));
 
   const startState = {
     pieces: [
@@ -47,9 +52,7 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
         }}
       >
         <CellLayer
-          cells={_range(0, ROW_LENGTH * COLUMN_HEIGHT).map(n => ({
-            slot: n
-          }))}
+          cells={boardCells}
           renderCell={({ slot }) => (
             <Cell
               slot={slot}
@@ -63,6 +66,7 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
             />
           )}
         />
+        <DropLayer cells={boardCells} />
         <PieceLayer pieces={pieces} />
       </Box>
       <button onClick={() => shiftRight()}>Shift Right</button>

@@ -3,3 +3,7 @@ export interface PieceData {
   slots: number[];
   color?: string;
 }
+
+export interface CellData {
+  slot: number;
+}

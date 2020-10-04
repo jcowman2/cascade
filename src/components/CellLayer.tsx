@@ -2,10 +2,7 @@ import React from "react";
 /** @jsx jsx */
 import { jsx, Box } from "theme-ui";
 import { CELL_WIDTH, ROW_LENGTH } from "../constants";
-
-export interface CellData {
-  slot: number;
-}
+import { CellData } from "../types/game";
 
 export interface CellLayerProps {
   cells: CellData[];
