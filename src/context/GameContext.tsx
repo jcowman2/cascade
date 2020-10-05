@@ -37,16 +37,17 @@ const DEFAULT_PIECES: PieceData[] = [
   {
     id: 0,
     slots: [17, 18, 19, 31],
-    color: GameColors.primary
+    kind: GameColors.primary
   },
   {
     id: 1,
     slots: [1, 13, 25, 14, 26],
-    color: GameColors.secondary
+    kind: GameColors.secondary
   },
   {
     id: 2,
-    slots: [30, 42, 43]
+    slots: [30, 42, 43],
+    kind: GameColors.text
   }
 ];
 

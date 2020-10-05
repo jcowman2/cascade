@@ -3,7 +3,7 @@ import React from "react";
 export interface PieceData {
   id: string | number;
   slots: number[];
-  color?: string;
+  kind: PieceKind;
 }
 
 export interface CellData {
@@ -11,3 +11,5 @@ export interface CellData {
 }
 
 export type ReactSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+
+export type PieceKind = string;

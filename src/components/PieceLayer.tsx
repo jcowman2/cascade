@@ -1,6 +1,5 @@
 import React from "react";
 import { useDragLayer } from "react-dnd";
-import { GameColors } from "../constants";
 import { usePieceControls } from "../hooks/pieceControls";
 import { PieceData } from "../types/game";
 import Piece from "./Piece";
@@ -25,19 +24,6 @@ const PieceLayer: React.FC<PieceLayerProps> = props => {
     }
   }, [item, absoluteOffset, setDragPieceOffset]);
 
-  // const renderedPieces = React.useMemo(
-  //   () =>
-  //     pieces.map(piece => (
-  //       <Piece
-  //         key={piece.id}
-  //         id={piece.id}
-  //         slots={piece.slots}
-  //         color={piece.color ?? GameColors.text}
-  //       />
-  //     )),
-  //   [pieces]
-  // );
-
   return (
     <React.Fragment>
       {item && absoluteOffset && (
@@ -48,7 +34,7 @@ const PieceLayer: React.FC<PieceLayerProps> = props => {
           key={piece.id}
           id={piece.id}
           slots={piece.slots}
-          color={piece.color ?? GameColors.text}
+          kind={piece.kind}
         />
       ))}
     </React.Fragment>

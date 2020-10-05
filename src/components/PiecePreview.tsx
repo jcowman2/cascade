@@ -6,8 +6,8 @@ import {
   PIECE_PREVIEW_OFFSET,
   ROW_LENGTH
 } from "../constants";
+import usePieceCellPainter from "../hooks/pieceCellPainter";
 import { PieceData } from "../types/game";
-import Cell from "./Cell";
 import CellLayer from "./CellLayer";
 
 export interface PiecePreviewProps {
@@ -17,13 +17,10 @@ export interface PiecePreviewProps {
 
 const PiecePreview: React.FC<PiecePreviewProps> = props => {
   const { piece, offset } = props;
-  const { slots, color } = piece;
+  const { slots } = piece;
 
   const cells = React.useMemo(() => slots.map(slot => ({ slot })), [slots]);
-  const renderCell = React.useCallback(
-    ({ slot }) => <Cell slot={slot} style={{ backgroundColor: color }} />,
-    [color]
-  );
+  const renderCell = usePieceCellPainter(piece);
 
   const xFromCursor = React.useMemo(() => {
     const slotCols = piece.slots.map(slot => slot % ROW_LENGTH);
