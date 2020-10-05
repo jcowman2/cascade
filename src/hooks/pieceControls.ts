@@ -4,6 +4,7 @@ import { CELL_WIDTH, ROW_LENGTH } from "../constants";
 import { GameContext } from "../context/GameContext";
 import { PieceData } from "../types/game";
 import { translatePieceToSlot } from "../utils/gameUtils";
+import { regroupPieces } from "../utils/regroupPieces";
 
 const translateSlotHoriz = (slot: number, count: number) => {
   const y = Math.floor(slot / ROW_LENGTH);
@@ -28,17 +29,18 @@ export const usePieceControls = () => {
     setDraggingPiece,
     windowPos,
     setHoverCell,
-    hoverCell
+    hoverCell,
+    draggingPiece
   } = React.useContext(GameContext);
 
   const shiftRight = (count: number = 1) => {
-    setPieces(prevPieces =>
-      prevPieces.map(p => {
+    setPieces(prevPieces => {
+      const translatedPieces = prevPieces.map(p => {
         const newSlots = p.slots.map(slot => translateSlotHoriz(slot, count));
-        // TODO - Split up pieces
         return { ...p, slots: newSlots };
-      })
-    );
+      });
+      return regroupPieces(translatedPieces, draggingPiece);
+    });
   };
 
   // const removePiece = (pieceId: string | number) => {
@@ -67,11 +69,12 @@ export const usePieceControls = () => {
       console.error("handlePieceDropped", piece, hoverCell);
       return;
     }
-    setPieces(prevPieces =>
-      prevPieces.map(p =>
+    setPieces(prevPieces => {
+      const translatedPieces = prevPieces.map(p =>
         p.id === piece.id ? translatePieceToSlot(piece, hoverCell) : p
-      )
-    );
+      );
+      return regroupPieces(translatedPieces, undefined);
+    });
     cleanupDrag();
   };
 
