@@ -20,13 +20,21 @@ const calculateHoverCell = (windowPos: XYCoord, offset: XYCoord) => {
   return hoverCell;
 };
 
+const translatePieceToSlot = (piece: PieceData, slot: number): PieceData => {
+  const origin = Math.min(...piece.slots);
+  const offsets = piece.slots.map(s => s - origin);
+  const translated = offsets.map(offset => offset + slot);
+  return { ...piece, slots: translated };
+};
+
 export const usePieceControls = () => {
   const {
     pieces,
     setPieces,
     setDraggingPiece,
     windowPos,
-    setHoverCell
+    setHoverCell,
+    hoverCell
   } = React.useContext(GameContext);
 
   const shiftRight = (count: number = 1) => {
@@ -51,5 +59,34 @@ export const usePieceControls = () => {
     setHoverCell(calculateHoverCell(windowPos, offset));
   };
 
-  return { pieces, shiftRight, setDragPieceOffset };
+  const cleanupDrag = () => {
+    setDraggingPiece(undefined);
+    setHoverCell(undefined);
+  };
+
+  const handlePieceDropped = (piece: PieceData) => {
+    console.log("dropped at", hoverCell);
+    if (!hoverCell) {
+      console.error("handlePieceDropped", piece, hoverCell);
+      return;
+    }
+    setPieces(prevPieces =>
+      prevPieces.map(p =>
+        p.id === piece.id ? translatePieceToSlot(piece, hoverCell) : p
+      )
+    );
+    cleanupDrag();
+  };
+
+  const handlePieceMissed = (piece: PieceData) => {
+    cleanupDrag();
+  };
+
+  return {
+    pieces,
+    shiftRight,
+    setDragPieceOffset,
+    handlePieceDropped,
+    handlePieceMissed
+  };
 };

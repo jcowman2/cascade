@@ -11,22 +11,31 @@ export interface PieceProps extends PieceData {}
 
 const Piece: React.FC<PieceProps> = props => {
   const { slots, color, id } = props;
+  const { handlePieceDropped, handlePieceMissed } = usePieceControls();
 
   const [{ isDragging }, drag, preview] = useDrag({
     item: { type: ItemTypes.Piece, slots, color, id },
+    end: (item, monitor) => {
+      if (!item) {
+        return;
+      }
+      const didDrop = monitor.didDrop();
+      if (didDrop) {
+        handlePieceDropped(item);
+      } else {
+        handlePieceMissed(item);
+      }
+    },
     collect: monitor => ({
       isDragging: !!monitor.isDragging()
     })
   });
 
-  const [_, drop] = useDrop({
-    accept: ItemTypes.Piece
-    // collect: monitor => ({
-    //   isOver: monitor.isOver()
-    // })
-    // canDrop: (item: PieceData & { type: string }) => {
-    //   return item.id === id;
-    // }
+  const [, drop] = useDrop({
+    accept: ItemTypes.Piece,
+    canDrop: (item: PieceData & { type: string }) => {
+      return item.id === id;
+    }
   });
 
   React.useEffect(() => {

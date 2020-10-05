@@ -14,14 +14,9 @@ const DropLayer: React.FC<DropLayerProps> = props => {
   const { cells } = props;
   const { hoverCell } = useBoardControls();
 
-  const [{ dropResult }, drop] = useDrop({
-    accept: ItemTypes.Piece,
-    collect: monitor => ({
-      dropResult: monitor.getDropResult()
-    })
+  const [, drop] = useDrop({
+    accept: ItemTypes.Piece
   });
-
-  React.useEffect(() => console.log(dropResult), [dropResult]);
 
   return (
     <div ref={drop}>
