@@ -33,15 +33,18 @@ export const usePieceControls = () => {
     draggingPiece
   } = React.useContext(GameContext);
 
-  const shiftRight = (count: number = 1) => {
-    setPieces(prevPieces => {
-      const translatedPieces = prevPieces.map(p => {
-        const newSlots = p.slots.map(slot => translateSlotHoriz(slot, count));
-        return { ...p, slots: newSlots };
+  const shiftRight = React.useCallback(
+    (count: number = 1) => {
+      setPieces(prevPieces => {
+        const translatedPieces = prevPieces.map(p => {
+          const newSlots = p.slots.map(slot => translateSlotHoriz(slot, count));
+          return { ...p, slots: newSlots };
+        });
+        return regroupPieces(translatedPieces, draggingPiece);
       });
-      return regroupPieces(translatedPieces, draggingPiece);
-    });
-  };
+    },
+    [draggingPiece, setPieces]
+  );
 
   // const removePiece = (pieceId: string | number) => {
   //   setPieces(prevPieces => prevPieces.filter(({ id }) => id !== pieceId));

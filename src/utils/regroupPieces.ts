@@ -69,5 +69,9 @@ export const regroupPieces = (
       .forEach(piece => newPieces.push(piece));
   }
 
+  if (draggingPiece) {
+    newPieces.push(draggingPiece);
+  }
+
   return newPieces;
 };
