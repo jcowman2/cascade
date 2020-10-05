@@ -7,6 +7,8 @@ import CellLayer from "./CellLayer";
 import PieceLayer from "./PieceLayer";
 import DropLayer from "./DropLayer";
 import { CellData, PieceData } from "../types/game";
+import useRectPoller from "../hooks/rectPoller";
+import { useBoardControls } from "../hooks/boardControls";
 
 export interface LoopWindowProps {
   boardCells: CellData[];
@@ -15,6 +17,15 @@ export interface LoopWindowProps {
 
 const LoopWindow: React.FC<LoopWindowProps> = props => {
   const { boardCells, pieces } = props;
+  const { setWindowPos } = useBoardControls();
+  const { top, left, divRef } = useRectPoller();
+
+  React.useEffect(() => {
+    if (top === undefined || left === undefined) {
+      return;
+    }
+    setWindowPos({ x: left, y: top });
+  }, [top, left, setWindowPos]);
 
   const width = CELL_WIDTH * ROW_LENGTH;
   const height = CELL_WIDTH * COLUMN_HEIGHT;
@@ -44,6 +55,7 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
         borderStyle: "solid",
         borderColor: "text"
       }}
+      ref={divRef}
     >
       <CellLayer cells={boardCells} renderCell={dashLayerRenderCell} />
       <DropLayer cells={boardCells} />
