@@ -24,3 +24,9 @@ export interface Level {
   pieces: PieceData[];
   key: CascadeCellData[];
 }
+
+export enum ScreenId {
+  Welcome,
+  Game,
+  End
+}
