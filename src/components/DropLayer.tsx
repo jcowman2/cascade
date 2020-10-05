@@ -12,7 +12,7 @@ export interface DropLayerProps {
 
 const DropLayer: React.FC<DropLayerProps> = props => {
   const { cells } = props;
-  const { hoverCell } = useBoardControls();
+  const { highlightedCells } = useBoardControls();
 
   const [, drop] = useDrop({
     accept: ItemTypes.Piece
@@ -24,10 +24,12 @@ const DropLayer: React.FC<DropLayerProps> = props => {
         cells={cells}
         renderCell={({ slot }) => (
           <Cell
+            key={slot}
             slot={slot}
             style={{
-              backgroundColor:
-                slot === hoverCell ? GameColors.highlight : undefined,
+              backgroundColor: highlightedCells.includes(slot)
+                ? GameColors.highlight
+                : "inherit",
               opacity: 0.5
             }}
           />
