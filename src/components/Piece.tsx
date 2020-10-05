@@ -1,7 +1,5 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-/** @jsx jsx */
-import { jsx } from "theme-ui";
 import CellLayer from "./CellLayer";
 import Cell from "./Cell";
 import { ItemTypes } from "../constants";
@@ -27,7 +25,10 @@ const Piece: React.FC<PieceProps> = props => {
   const cells = React.useMemo(() => slots.map(slot => ({ slot })), [slots]);
   const renderCell = React.useCallback(
     ({ slot }) => (
-      <Cell slot={slot} sx={{ bg: color, opacity: isDragging ? 0 : 1 }} />
+      <Cell
+        slot={slot}
+        style={{ backgroundColor: color, opacity: isDragging ? 0 : 1 }}
+      />
     ),
     [color, isDragging]
   );
@@ -36,7 +37,7 @@ const Piece: React.FC<PieceProps> = props => {
     <React.Fragment>
       <div
         ref={drag}
-        sx={{
+        style={{
           cursor: "move",
           position: "absolute"
         }}

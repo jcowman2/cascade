@@ -1,6 +1,4 @@
 import React from "react";
-/** @jsx jsx */
-import { jsx } from "theme-ui";
 import { CellData } from "../types/game";
 import DropLayerCell from "./DropLayerCell";
 
@@ -10,7 +8,6 @@ export interface DropLayerProps {
 
 const DropLayer: React.FC<DropLayerProps> = props => {
   const { cells } = props;
-  console.log("DropLayer");
 
   return (
     <React.Fragment>
@@ -21,4 +18,4 @@ const DropLayer: React.FC<DropLayerProps> = props => {
   );
 };
 
-export default React.memo(DropLayer);
+export default DropLayer;

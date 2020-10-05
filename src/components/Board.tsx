@@ -2,7 +2,7 @@ import React from "react";
 /** @jsx jsx */
 import { Container, jsx } from "theme-ui";
 import _range from "lodash.range";
-import { ROW_LENGTH, COLUMN_HEIGHT } from "../constants";
+import { ROW_LENGTH, COLUMN_HEIGHT, GameColors } from "../constants";
 import { usePieceControls } from "../hooks/pieceControls";
 import LoopWindow from "./LoopWindow";
 
@@ -23,12 +23,12 @@ const Board: React.FC<BoardProps> = props => {
         {
           id: 0,
           slots: [17, 18, 19, 31],
-          color: "primary"
+          color: GameColors.primary
         },
         {
           id: 1,
           slots: [1, 13, 25, 14, 26],
-          color: "secondary"
+          color: GameColors.secondary
         },
         {
           id: 2,

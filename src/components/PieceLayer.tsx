@@ -2,6 +2,7 @@ import React from "react";
 import { useDragLayer } from "react-dnd";
 /** @jsx jsx */
 import { jsx } from "theme-ui";
+import { GameColors } from "../constants";
 import { PieceData } from "../types/game";
 import Piece from "./Piece";
 import PiecePreview from "./PiecePreview";
@@ -25,7 +26,7 @@ const PieceLayer: React.FC<PieceLayerProps> = props => {
           key={piece.id}
           id={piece.id}
           slots={piece.slots}
-          color={piece.color ?? "text"}
+          color={piece.color ?? GameColors.text}
         />
       )),
     [pieces]

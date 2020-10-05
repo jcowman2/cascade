@@ -1,7 +1,5 @@
 import React from "react";
 import { XYCoord } from "react-dnd";
-/** @jsx jsx */
-import { jsx } from "theme-ui";
 import {
   CELL_WIDTH,
   COLUMN_HEIGHT,
@@ -20,11 +18,10 @@ export interface PiecePreviewProps {
 const PiecePreview: React.FC<PiecePreviewProps> = props => {
   const { piece, offset } = props;
   const { slots, color } = piece;
-  // console.log("PiecePreview");
 
   const cells = React.useMemo(() => slots.map(slot => ({ slot })), [slots]);
   const renderCell = React.useCallback(
-    ({ slot }) => <Cell slot={slot} sx={{ bg: color }} />,
+    ({ slot }) => <Cell slot={slot} style={{ backgroundColor: color }} />,
     [color]
   );
 
@@ -42,12 +39,13 @@ const PiecePreview: React.FC<PiecePreviewProps> = props => {
 
   return (
     <div
-      sx={{
+      style={{
         position: "fixed",
         top: offset.y - yFromCursor + PIECE_PREVIEW_OFFSET,
         left: offset.x - xFromCursor + PIECE_PREVIEW_OFFSET
       }}
     >
+      {/* <div style={{ width: 100, height: 100, backgroundColor: "blue" }}></div> */}
       <CellLayer cells={cells} renderCell={renderCell} />
     </div>
   );

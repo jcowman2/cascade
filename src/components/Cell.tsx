@@ -5,22 +5,22 @@ import { CELL_WIDTH } from "../constants";
 
 export interface CellProps {
   slot: number;
-  className?: string;
+  style?: React.CSSProperties;
   showLabel?: boolean;
 }
 
 const Cell: React.FC<CellProps> = props => {
-  const { slot, className, showLabel = false } = props;
+  const { slot, style = {}, showLabel = false } = props;
   const width = CELL_WIDTH;
   return (
     <Box
-      className={className}
-      sx={{
+      style={{
         width,
         height: width,
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        ...style
       }}
     >
       {showLabel && <Text>{slot}</Text>}

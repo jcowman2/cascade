@@ -1,6 +1,4 @@
 import React from "react";
-/** @jsx jsx */
-import { jsx, Box } from "theme-ui";
 import { CELL_WIDTH, ROW_LENGTH } from "../constants";
 import { CellData } from "../types/game";
 
@@ -11,18 +9,17 @@ export interface CellLayerProps {
 
 const CellLayer: React.FC<CellLayerProps> = props => {
   const { cells, renderCell } = props;
-  console.log("CellLayer");
 
   return (
-    <Box sx={{ position: "absolute" }}>
+    <div style={{ position: "absolute" }}>
       {cells.map(cellData => {
         const { slot } = cellData;
         const y = Math.floor(slot / ROW_LENGTH);
         const x = slot - y * ROW_LENGTH;
         return (
-          <Box
+          <div
             key={slot}
-            sx={{
+            style={{
               position: "absolute",
               top: y * CELL_WIDTH,
               left: x * CELL_WIDTH,
@@ -31,11 +28,12 @@ const CellLayer: React.FC<CellLayerProps> = props => {
             }}
           >
             {renderCell(cellData)}
-          </Box>
+          </div>
         );
       })}
-    </Box>
+    </div>
   );
 };
 
-export default React.memo(CellLayer);
+// export default React.memo(CellLayer);
+export default CellLayer;
