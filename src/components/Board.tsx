@@ -7,13 +7,22 @@ import KeyWindow from "./KeyWindow";
 import LoopManager from "./LoopManager";
 import LoopWindow from "./LoopWindow";
 
-export interface BoardProps {}
+export interface BoardProps {
+  onGameEnd: () => void;
+}
 
 const Board: React.FC<BoardProps> = props => {
-  const { boardCells, loopSpeed } = useBoardControls();
+  const { onGameEnd } = props;
+  const { boardCells, loopSpeed, gameEnded } = useBoardControls();
   const { pieces, shiftRight } = usePieceControls();
 
   const isPlaying = !!loopSpeed;
+
+  React.useEffect(() => {
+    if (gameEnded) {
+      onGameEnd();
+    }
+  }, [onGameEnd, gameEnded]);
 
   return (
     <Hero>

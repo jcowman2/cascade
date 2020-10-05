@@ -1,8 +1,6 @@
 import React from "react";
-import _range from "lodash.range";
 import _flatten from "lodash.flatten";
 import _difference from "lodash.difference";
-import { ROW_LENGTH, COLUMN_HEIGHT, GameColors } from "../constants";
 import {
   CascadeCellData,
   CellData,
@@ -28,6 +26,7 @@ export interface GameContextProps {
   cascadeView: CascadeCellData[];
   cascadeMatchesKey: boolean;
   loopSpeed: number;
+  gameEnded: boolean;
 }
 
 export const GameContext = React.createContext<GameContextProps>({
@@ -41,17 +40,17 @@ export const GameContext = React.createContext<GameContextProps>({
   key: [],
   cascadeView: [],
   cascadeMatchesKey: false,
-  loopSpeed: 0
+  loopSpeed: 0,
+  gameEnded: false
 });
 
 export const GameContextProvider: React.FC = props => {
   const [boardCells, setBoardCells] = React.useState<CellData[]>([]);
   const [pieces, setPieces] = React.useState<PieceData[]>([]);
   const [key, setKey] = React.useState<CascadeCellData[]>([]);
+  const [gameEnded, setGameEnded] = React.useState(false);
 
-  const onGameEnd = () => {
-    alert("Thank you for playing!");
-  };
+  const onGameEnd = () => setGameEnded(true);
 
   const { goToNextLevel, loopSpeed, setLoopSpeed } = useLevelManager(
     setBoardCells,
@@ -98,7 +97,8 @@ export const GameContextProvider: React.FC = props => {
         key,
         cascadeView,
         cascadeMatchesKey,
-        loopSpeed
+        loopSpeed,
+        gameEnded
       }}
     >
       {props.children}
