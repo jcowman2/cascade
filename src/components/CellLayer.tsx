@@ -11,7 +11,7 @@ export interface CellLayerProps {
 
 const CellLayer: React.FC<CellLayerProps> = props => {
   const { cells, renderCell } = props;
-  console.log("re-rendering");
+  console.log("CellLayer");
 
   return (
     <Box sx={{ position: "absolute" }}>

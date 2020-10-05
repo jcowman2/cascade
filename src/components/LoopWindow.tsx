@@ -19,6 +19,22 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
   const width = CELL_WIDTH * ROW_LENGTH;
   const height = CELL_WIDTH * COLUMN_HEIGHT;
 
+  const dashLayerRenderCell = React.useCallback(
+    ({ slot }) => (
+      <Cell
+        slot={slot}
+        showLabel
+        sx={{
+          borderWidth: 1,
+          borderColor: "text",
+          borderStyle: "dashed",
+          opacity: 0.5
+        }}
+      />
+    ),
+    []
+  );
+
   return (
     <Box
       sx={{
@@ -29,21 +45,7 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
         borderColor: "text"
       }}
     >
-      <CellLayer
-        cells={boardCells}
-        renderCell={({ slot }) => (
-          <Cell
-            slot={slot}
-            showLabel
-            sx={{
-              borderWidth: 1,
-              borderColor: "text",
-              borderStyle: "dashed",
-              opacity: 0.5
-            }}
-          />
-        )}
-      />
+      <CellLayer cells={boardCells} renderCell={dashLayerRenderCell} />
       <DropLayer cells={boardCells} />
       <PieceLayer pieces={pieces} />
     </Box>

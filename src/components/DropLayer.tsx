@@ -10,6 +10,7 @@ export interface DropLayerProps {
 
 const DropLayer: React.FC<DropLayerProps> = props => {
   const { cells } = props;
+  console.log("DropLayer");
 
   return (
     <React.Fragment>
@@ -20,4 +21,4 @@ const DropLayer: React.FC<DropLayerProps> = props => {
   );
 };
 
-export default DropLayer;
+export default React.memo(DropLayer);

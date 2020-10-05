@@ -13,6 +13,7 @@ export interface DropLayerCellProps {
 
 const DropLayerCell: React.FC<DropLayerCellProps> = props => {
   const { cell } = props;
+  // console.log("DropLayerCell");
 
   const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.Piece,
@@ -22,17 +23,20 @@ const DropLayerCell: React.FC<DropLayerCellProps> = props => {
     })
   });
 
+  const cells = React.useMemo(() => [cell], [cell]);
+  const renderCell = React.useCallback(
+    ({ slot }) => (
+      <Cell
+        slot={slot}
+        sx={{ bg: isOver ? "gold" : undefined, opacity: 0.5 }}
+      />
+    ),
+    [isOver]
+  );
+
   return (
     <div ref={drop}>
-      <CellLayer
-        cells={[cell]}
-        renderCell={({ slot }) => (
-          <Cell
-            slot={slot}
-            sx={{ bg: isOver ? "gold" : undefined, opacity: 0.5 }}
-          />
-        )}
-      />
+      <CellLayer cells={cells} renderCell={renderCell} />
     </div>
   );
 };

@@ -20,6 +20,7 @@ export interface PiecePreviewProps {
 const PiecePreview: React.FC<PiecePreviewProps> = props => {
   const { piece, offset } = props;
   const { slots, color } = piece;
+  // console.log("PiecePreview");
 
   const cells = React.useMemo(() => slots.map(slot => ({ slot })), [slots]);
   const renderCell = React.useCallback(
