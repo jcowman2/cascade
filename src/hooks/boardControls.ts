@@ -1,21 +1,12 @@
 import React from "react";
 import { GameContext } from "../context/GameContext";
-import { translatePieceToSlot } from "../utils/gameUtils";
+import { useCanPieceDrop } from "./pieceDrop";
 
 export const useBoardControls = () => {
-  const {
-    boardCells,
-    setWindowPos,
-    hoverCell,
-    draggingPiece
-  } = React.useContext(GameContext);
+  const { boardCells, setWindowPos, hoverCell } = React.useContext(GameContext);
+  const { canDrop, potentialSlots } = useCanPieceDrop();
 
-  const highlightedCells = React.useMemo(() => {
-    if (hoverCell === undefined || !draggingPiece) {
-      return [];
-    }
-    return translatePieceToSlot(draggingPiece, hoverCell).slots;
-  }, [hoverCell, draggingPiece]);
+  const highlightedCells = canDrop ? potentialSlots : [];
 
   return { boardCells, setWindowPos, hoverCell, highlightedCells };
 };

@@ -1,7 +1,7 @@
 import React from "react";
-import { useDrop } from "react-dnd";
-import { GameColors, ItemTypes } from "../constants";
+import { GameColors } from "../constants";
 import { useBoardControls } from "../hooks/boardControls";
+import { usePieceDrop } from "../hooks/pieceDrop";
 import { CellData } from "../types/game";
 import Cell from "./Cell";
 import CellLayer from "./CellLayer";
@@ -13,13 +13,10 @@ export interface DropLayerProps {
 const DropLayer: React.FC<DropLayerProps> = props => {
   const { cells } = props;
   const { highlightedCells } = useBoardControls();
-
-  const [, drop] = useDrop({
-    accept: ItemTypes.Piece
-  });
+  const { dropRef } = usePieceDrop();
 
   return (
-    <div ref={drop}>
+    <div ref={dropRef}>
       <CellLayer
         cells={cells}
         renderCell={({ slot }) => (

@@ -1,17 +1,19 @@
 import React from "react";
-import { useDrag, useDrop } from "react-dnd";
+import { useDrag } from "react-dnd";
 import CellLayer from "./CellLayer";
 import Cell from "./Cell";
 import { ItemTypes } from "../constants";
 import { getEmptyImage } from "react-dnd-html5-backend";
 import { PieceData } from "../types/game";
 import { usePieceControls } from "../hooks/pieceControls";
+import { usePieceDrop } from "../hooks/pieceDrop";
 
 export interface PieceProps extends PieceData {}
 
 const Piece: React.FC<PieceProps> = props => {
   const { slots, color, id } = props;
   const { handlePieceDropped, handlePieceMissed } = usePieceControls();
+  const { dropRef } = usePieceDrop();
 
   const [{ isDragging }, drag, preview] = useDrag({
     item: { type: ItemTypes.Piece, slots, color, id },
@@ -29,13 +31,6 @@ const Piece: React.FC<PieceProps> = props => {
     collect: monitor => ({
       isDragging: !!monitor.isDragging()
     })
-  });
-
-  const [, drop] = useDrop({
-    accept: ItemTypes.Piece,
-    canDrop: (item: PieceData & { type: string }) => {
-      return item.id === id;
-    }
   });
 
   React.useEffect(() => {
@@ -61,7 +56,7 @@ const Piece: React.FC<PieceProps> = props => {
 
   function doubleRef(el: any) {
     drag(el);
-    drop(el);
+    dropRef(el);
   }
 
   return (

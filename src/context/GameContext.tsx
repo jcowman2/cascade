@@ -1,5 +1,7 @@
 import React from "react";
 import _range from "lodash.range";
+import _flatten from "lodash.flatten";
+import _difference from "lodash.difference";
 import { ROW_LENGTH, COLUMN_HEIGHT, GameColors } from "../constants";
 import { CellData, PieceData, ReactSetter } from "../types/game";
 import { XYCoord } from "react-dnd";
@@ -14,6 +16,7 @@ export interface GameContextProps {
   setDraggingPiece: ReactSetter<PieceData | undefined>;
   hoverCell?: number;
   setHoverCell: ReactSetter<number | undefined>;
+  availableSlots: number[];
 }
 
 export const GameContext = React.createContext<GameContextProps>({
@@ -22,7 +25,8 @@ export const GameContext = React.createContext<GameContextProps>({
   setPieces: () => {},
   setWindowPos: () => {},
   setDraggingPiece: () => {},
-  setHoverCell: () => {}
+  setHoverCell: () => {},
+  availableSlots: []
 });
 
 const FULL_BOARD: CellData[] = _range(0, ROW_LENGTH * COLUMN_HEIGHT).map(n => ({
@@ -53,6 +57,15 @@ export const GameContextProvider: React.FC = props => {
   const [draggingPiece, setDraggingPiece] = React.useState<PieceData>();
   const [hoverCell, setHoverCell] = React.useState<number>();
 
+  const availableSlots = React.useMemo(() => {
+    const draggingId = draggingPiece?.id;
+    const takenSlots = _flatten(
+      pieces.map(piece => (piece.id === draggingId ? [] : piece.slots))
+    );
+    const allSlots = boardCells.map(({ slot }) => slot);
+    return _difference(allSlots, takenSlots);
+  }, [draggingPiece, pieces, boardCells]);
+
   return (
     <GameContext.Provider
       value={{
@@ -64,7 +77,8 @@ export const GameContextProvider: React.FC = props => {
         draggingPiece,
         setDraggingPiece,
         hoverCell,
-        setHoverCell
+        setHoverCell,
+        availableSlots
       }}
     >
       {props.children}
