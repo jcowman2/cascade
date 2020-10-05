@@ -36,6 +36,48 @@ const Box = {
   ]
 };
 
+const Stripes = {
+  board: FULL_BOARD,
+  pieces: [
+    {
+      id: 0,
+      slots: [6, 7, 8, 17, 18, 19, 28, 29, 30],
+      kind: GameColors.primary
+    },
+    {
+      id: 1,
+      slots: [9, 10, 11, 20, 21, 22, 29, 30, 31],
+      kind: GameColors.text
+    }
+  ],
+  key: [
+    {
+      slot: 1,
+      kind: GameColors.primary
+    },
+    {
+      slot: 2,
+      kind: GameColors.text
+    },
+    {
+      slot: 3,
+      kind: GameColors.primary
+    },
+    {
+      slot: 4,
+      kind: GameColors.text
+    },
+    {
+      slot: 5,
+      kind: GameColors.primary
+    },
+    {
+      slot: 6,
+      kind: GameColors.text
+    }
+  ]
+};
+
 const Ribbon = {
   board: FULL_BOARD,
   pieces: [
@@ -83,4 +125,4 @@ const Ribbon = {
   ]
 };
 
-export const Levels: Level[] = [Box, Ribbon];
+export const Levels: Level[] = [Box, Ribbon, Stripes];
