@@ -1,6 +1,4 @@
 import React from "react";
-/** @jsx jsx */
-import { jsx, Box, Text } from "theme-ui";
 import { CELL_WIDTH } from "../constants";
 
 export interface CellProps {
@@ -13,7 +11,7 @@ const Cell: React.FC<CellProps> = props => {
   const { slot, style = {}, showLabel = false } = props;
   const width = CELL_WIDTH;
   return (
-    <Box
+    <div
       style={{
         width,
         height: width,
@@ -23,8 +21,8 @@ const Cell: React.FC<CellProps> = props => {
         ...style
       }}
     >
-      {showLabel && <Text>{slot}</Text>}
-    </Box>
+      {showLabel && <span>{slot}</span>}
+    </div>
   );
 };
 

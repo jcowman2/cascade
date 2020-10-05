@@ -1,6 +1,4 @@
 import React from "react";
-/** @jsx jsx */
-import { Container, jsx } from "theme-ui";
 import { useBoardControls } from "../hooks/boardControls";
 import { usePieceControls } from "../hooks/pieceControls";
 import LoopWindow from "./LoopWindow";
@@ -12,8 +10,8 @@ const Board: React.FC<BoardProps> = props => {
   const { pieces, shiftRight } = usePieceControls();
 
   return (
-    <Container
-      sx={{
+    <div
+      style={{
         margin: "auto",
         display: "flex",
         justifyContent: "center",
@@ -23,7 +21,7 @@ const Board: React.FC<BoardProps> = props => {
     >
       <LoopWindow boardCells={boardCells} pieces={pieces} />
       <button onClick={() => shiftRight()}>Shift Right</button>
-    </Container>
+    </div>
   );
 };
 

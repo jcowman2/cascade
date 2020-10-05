@@ -1,6 +1,4 @@
 import React from "react";
-/** @jsx jsx */
-import { jsx, Box } from "theme-ui";
 import { CELL_WIDTH, COLUMN_HEIGHT, ROW_LENGTH } from "../constants";
 import Cell from "./Cell";
 import CellLayer from "./CellLayer";
@@ -47,8 +45,8 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
   );
 
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         width,
         height,
         borderWidth: 1,
@@ -60,7 +58,7 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
       <CellLayer cells={boardCells} renderCell={dashLayerRenderCell} />
       <DropLayer cells={boardCells} />
       <PieceLayer pieces={pieces} />
-    </Box>
+    </div>
   );
 };
 

@@ -20,13 +20,13 @@ const Piece: React.FC<PieceProps> = props => {
   });
 
   const [_, drop] = useDrop({
-    accept: ItemTypes.Piece,
-    collect: monitor => ({
-      isOver: monitor.isOver()
-    }),
-    canDrop: (item: PieceData & { type: string }) => {
-      return item.id === id;
-    }
+    accept: ItemTypes.Piece
+    // collect: monitor => ({
+    //   isOver: monitor.isOver()
+    // })
+    // canDrop: (item: PieceData & { type: string }) => {
+    //   return item.id === id;
+    // }
   });
 
   React.useEffect(() => {

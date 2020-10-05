@@ -1,7 +1,5 @@
 import React from "react";
 import { useDragLayer } from "react-dnd";
-/** @jsx jsx */
-import { jsx } from "theme-ui";
 import { GameColors } from "../constants";
 import { usePieceControls } from "../hooks/pieceControls";
 import { PieceData } from "../types/game";
@@ -21,9 +19,11 @@ const PieceLayer: React.FC<PieceLayerProps> = props => {
     absoluteOffset: monitor.getClientOffset()
   }));
 
-  if (item && absoluteOffset) {
-    setDragPieceOffset(item, absoluteOffset);
-  }
+  React.useEffect(() => {
+    if (item && absoluteOffset) {
+      setDragPieceOffset(item, absoluteOffset);
+    }
+  }, [item, absoluteOffset, setDragPieceOffset]);
 
   // const renderedPieces = React.useMemo(
   //   () =>

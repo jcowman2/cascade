@@ -10,7 +10,7 @@ const useRectPoller = () => {
     }
     const currentRect = divRef.current.getBoundingClientRect();
     setRect(currentRect);
-  }, 2000);
+  }, 1000);
 
   const top = rect?.top;
   const left = rect?.left;
