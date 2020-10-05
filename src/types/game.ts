@@ -18,3 +18,9 @@ export interface CascadeCellData {
   slot: number;
   kind: PieceKind;
 }
+
+export interface Level {
+  board: CellData[];
+  pieces: PieceData[];
+  key: CascadeCellData[];
+}

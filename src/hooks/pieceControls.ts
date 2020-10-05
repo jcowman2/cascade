@@ -30,7 +30,8 @@ export const usePieceControls = () => {
     windowPos,
     setHoverCell,
     hoverCell,
-    draggingPiece
+    draggingPiece,
+    cascadeMatchesKey
   } = React.useContext(GameContext);
 
   const shiftRight = React.useCallback(
@@ -86,11 +87,14 @@ export const usePieceControls = () => {
     cleanupDrag();
   };
 
+  const canDrag = !cascadeMatchesKey;
+
   return {
     pieces,
     shiftRight,
     setDragPieceOffset,
     handlePieceDropped,
-    handlePieceMissed
+    handlePieceMissed,
+    canDrag
   };
 };

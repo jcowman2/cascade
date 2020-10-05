@@ -12,7 +12,7 @@ export interface PieceProps extends PieceData {}
 
 const Piece: React.FC<PieceProps> = props => {
   const { slots, kind, id } = props;
-  const { handlePieceDropped, handlePieceMissed } = usePieceControls();
+  const { handlePieceDropped, handlePieceMissed, canDrag } = usePieceControls();
   const { dropRef } = usePieceDrop();
 
   const [{ isDragging }, drag, preview] = useDrag({
@@ -30,7 +30,8 @@ const Piece: React.FC<PieceProps> = props => {
     },
     collect: monitor => ({
       isDragging: !!monitor.isDragging()
-    })
+    }),
+    canDrag: () => canDrag
   });
 
   React.useEffect(() => {
@@ -51,7 +52,7 @@ const Piece: React.FC<PieceProps> = props => {
       <div
         ref={doubleRef}
         style={{
-          cursor: "move",
+          cursor: canDrag ? "move" : undefined,
           position: "absolute"
         }}
       >
