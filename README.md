@@ -1,3 +1,5 @@
-# LD47
+# Cascade
 
-(c) Joe Cowman, 2020
+Submission for Ludum Dare 47
+
+_(c) Joe Cowman, 2020_
