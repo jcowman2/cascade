@@ -34,12 +34,14 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
         slot={slot}
         showLabel={SHOW_GRID}
         style={
-          SHOW_GRID && {
-            borderWidth: 1,
-            borderColor: "text",
-            borderStyle: "dashed",
-            opacity: 0.5
-          }
+          SHOW_GRID
+            ? {
+                borderWidth: 1,
+                borderColor: "text",
+                borderStyle: "dashed",
+                opacity: 0.5
+              }
+            : undefined
         }
       />
     ),
