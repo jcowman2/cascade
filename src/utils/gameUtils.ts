@@ -1,6 +1,7 @@
 import { XYCoord } from "react-dnd";
 import _flatten from "lodash.flatten";
 import _groupBy from "lodash.groupby";
+import _isEqual from "lodash.isequal";
 import { COLUMN_HEIGHT, ROW_LENGTH } from "../constants";
 import { CascadeCellData, PieceData } from "../types/game";
 
@@ -66,4 +67,11 @@ export const getCascadeView = (
   }
 
   return cascadeCells;
+};
+
+export const checkCascadeKeyMatch = (
+  cascade: CascadeCellData[],
+  key: CascadeCellData[]
+) => {
+  return _isEqual(cascade, key);
 };

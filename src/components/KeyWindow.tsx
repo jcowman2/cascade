@@ -1,23 +1,23 @@
 import React from "react";
 import { CELL_WIDTH, ROW_LENGTH } from "../constants";
-import CellLayer from "./CellLayer";
-import usePieceCellPainter from "../hooks/pieceCellPainter";
 import { GameContext } from "../context/GameContext";
+import usePieceCellPainter from "../hooks/pieceCellPainter";
+import CellLayer from "./CellLayer";
 
-export interface CascadeWindowProps {
+export interface KeyWindowProps {
   style?: React.CSSProperties;
 }
 
-const CascadeWindow: React.FC<CascadeWindowProps> = props => {
-  const { style = {} } = props;
-  const { cascadeView } = React.useContext(GameContext);
+const KeyWindow: React.FC<KeyWindowProps> = props => {
+  const { style } = props;
+  const { key } = React.useContext(GameContext);
 
   const width = CELL_WIDTH * ROW_LENGTH;
   const height = CELL_WIDTH;
 
   const getKind = React.useCallback(
-    (slot: number) => cascadeView.find(cell => cell.slot === slot)!.kind,
-    [cascadeView]
+    (slot: number) => key.find(cell => cell.slot === slot)!.kind,
+    [key]
   );
   const renderCell = usePieceCellPainter(getKind);
 
@@ -32,9 +32,9 @@ const CascadeWindow: React.FC<CascadeWindowProps> = props => {
         ...style
       }}
     >
-      <CellLayer cells={cascadeView} renderCell={renderCell} />
+      <CellLayer cells={key} renderCell={renderCell} />
     </div>
   );
 };
 
-export default CascadeWindow;
+export default KeyWindow;
