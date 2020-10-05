@@ -1,6 +1,6 @@
 import React from "react";
 import { ROW_LENGTH } from "../constants";
-import { PieceData } from "../types/game";
+import { GameContext } from "../context/GameContext";
 
 const translateSlotHoriz = (slot: number, count: number) => {
   const y = Math.floor(slot / ROW_LENGTH);
@@ -10,8 +10,8 @@ const translateSlotHoriz = (slot: number, count: number) => {
   return newSlot;
 };
 
-export const usePieceControls = (startState: { pieces: PieceData[] }) => {
-  const [pieces, setPieces] = React.useState(startState.pieces);
+export const usePieceControls = () => {
+  const { pieces, setPieces } = React.useContext(GameContext);
 
   const shiftRight = (count: number = 1) => {
     setPieces(prevPieces =>

@@ -45,7 +45,6 @@ const PiecePreview: React.FC<PiecePreviewProps> = props => {
         left: offset.x - xFromCursor + PIECE_PREVIEW_OFFSET
       }}
     >
-      {/* <div style={{ width: 100, height: 100, backgroundColor: "blue" }}></div> */}
       <CellLayer cells={cells} renderCell={renderCell} />
     </div>
   );

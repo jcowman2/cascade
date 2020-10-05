@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface PieceData {
   id: string | number;
   slots: number[];
@@ -7,3 +9,5 @@ export interface PieceData {
 export interface CellData {
   slot: number;
 }
+
+export type ReactSetter<T> = React.Dispatch<React.SetStateAction<T>>;

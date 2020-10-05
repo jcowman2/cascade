@@ -9,7 +9,7 @@ import { PieceData } from "../types/game";
 export interface PieceProps extends PieceData {}
 
 const Piece: React.FC<PieceProps> = props => {
-  const { slots, color } = props;
+  const { slots, color, id } = props;
 
   const [{ isDragging }, drag, preview] = useDrag({
     item: { type: ItemTypes.Piece, slots, color },
