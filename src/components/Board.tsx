@@ -1,6 +1,7 @@
 import React from "react";
 import { useBoardControls } from "../hooks/boardControls";
 import { usePieceControls } from "../hooks/pieceControls";
+import CascadeWindow from "./CascadeWindow";
 import LoopManager from "./LoopManager";
 import LoopWindow from "./LoopWindow";
 
@@ -19,12 +20,17 @@ const Board: React.FC<BoardProps> = props => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh"
+        height: "100vh",
+        flexDirection: "column"
       }}
     >
-      <LoopWindow boardCells={boardCells} pieces={pieces} />
       <LoopManager speed={1} playing={isPlaying} onShift={shiftRight} />
-      <button onClick={() => setIsPlaying(prev => !prev)}>
+      <LoopWindow boardCells={boardCells} pieces={pieces} />
+      <CascadeWindow pieces={pieces} style={{ marginTop: 36 }} />
+      <button
+        onClick={() => setIsPlaying(prev => !prev)}
+        style={{ marginTop: 24 }}
+      >
         {isPlaying ? "Pause" : "Play"}
       </button>
     </div>

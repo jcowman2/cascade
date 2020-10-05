@@ -32,13 +32,13 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
     ({ slot }) => (
       <Cell
         slot={slot}
-        showLabel
-        sx={{
-          borderWidth: 1,
-          borderColor: "text",
-          borderStyle: "dashed",
-          opacity: 0.5
-        }}
+        // showLabel
+        // style={{
+        //   borderWidth: 1,
+        //   borderColor: "text",
+        //   borderStyle: "dashed",
+        //   opacity: 0.5
+        // }}
       />
     ),
     []

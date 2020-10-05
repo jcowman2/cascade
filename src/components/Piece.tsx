@@ -38,7 +38,8 @@ const Piece: React.FC<PieceProps> = props => {
   }, [preview]);
 
   const cells = React.useMemo(() => slots.map(slot => ({ slot })), [slots]);
-  const renderCell = usePieceCellPainter(props, { isHidden: isDragging });
+  const getKind = React.useCallback(() => kind, [kind]);
+  const renderCell = usePieceCellPainter(getKind, { isHidden: isDragging });
 
   function doubleRef(el: any) {
     drag(el);

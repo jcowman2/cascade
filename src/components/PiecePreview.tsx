@@ -20,7 +20,8 @@ const PiecePreview: React.FC<PiecePreviewProps> = props => {
   const { slots } = piece;
 
   const cells = React.useMemo(() => slots.map(slot => ({ slot })), [slots]);
-  const renderCell = usePieceCellPainter(piece);
+  const getKind = React.useCallback(() => piece.kind, [piece]);
+  const renderCell = usePieceCellPainter(getKind);
 
   const xFromCursor = React.useMemo(() => {
     const slotCols = piece.slots.map(slot => slot % ROW_LENGTH);

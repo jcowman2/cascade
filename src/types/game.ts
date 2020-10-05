@@ -13,3 +13,8 @@ export interface CellData {
 export type ReactSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
 export type PieceKind = string;
+
+export interface CascadeCellData {
+  slot: number;
+  kind: PieceKind;
+}

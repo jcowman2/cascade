@@ -94,3 +94,8 @@ export const usePieceControls = () => {
     handlePieceMissed
   };
 };
+
+export const useDraggingPiece = () => {
+  const { draggingPiece } = React.useContext(GameContext);
+  return draggingPiece;
+};

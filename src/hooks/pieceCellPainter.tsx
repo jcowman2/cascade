@@ -1,22 +1,24 @@
 import React from "react";
 import Cell from "../components/Cell";
-import { PieceData } from "../types/game";
+import { PieceKind } from "../types/game";
 
 const usePieceCellPainter = (
-  piece: PieceData,
+  kindFn: (slot: number) => PieceKind,
   config: { isHidden: boolean } = { isHidden: false }
 ) => {
-  const { kind } = piece;
   const { isHidden } = config;
 
   const renderCell = React.useCallback(
-    ({ slot }) => (
-      <Cell
-        slot={slot}
-        style={isHidden ? { display: "none" } : { backgroundColor: kind }}
-      />
-    ),
-    [kind, isHidden]
+    ({ slot }) => {
+      const kind = kindFn(slot);
+      return (
+        <Cell
+          slot={slot}
+          style={isHidden ? { display: "none" } : { backgroundColor: kind }}
+        />
+      );
+    },
+    [kindFn, isHidden]
   );
   return renderCell;
 };
