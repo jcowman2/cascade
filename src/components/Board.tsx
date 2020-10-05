@@ -9,10 +9,10 @@ import LoopWindow from "./LoopWindow";
 export interface BoardProps {}
 
 const Board: React.FC<BoardProps> = props => {
-  const { boardCells } = useBoardControls();
+  const { boardCells, loopSpeed } = useBoardControls();
   const { pieces, shiftRight } = usePieceControls();
 
-  const [isPlaying, setIsPlaying] = React.useState(false);
+  const isPlaying = !!loopSpeed;
 
   return (
     <div
@@ -25,18 +25,18 @@ const Board: React.FC<BoardProps> = props => {
         flexDirection: "column"
       }}
     >
-      <LoopManager speed={1} playing={isPlaying} onShift={shiftRight} />
+      <LoopManager speed={loopSpeed} playing={isPlaying} onShift={shiftRight} />
 
       <KeyWindow style={{ marginBottom: 36 }} />
       <LoopWindow boardCells={boardCells} pieces={pieces} />
       <CascadeWindow style={{ marginTop: 36 }} />
 
-      <button
+      {/* <button
         onClick={() => setIsPlaying(prev => !prev)}
         style={{ marginTop: 24 }}
       >
         {isPlaying ? "Pause" : "Play"}
-      </button>
+      </button> */}
     </div>
   );
 };

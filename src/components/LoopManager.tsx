@@ -12,12 +12,18 @@ const LoopManager: React.FC<LoopManagerProps> = props => {
   const [flag, setFlag] = React.useState(false);
   const [tick, setTick] = React.useState(0);
 
+  // if (!speed) {
+  //   return null;
+  // }
+
   return (
     <Timeline
       playing={playing}
       endBehavior="loop"
       defaultState={{ flag: 0 }}
-      track={[{ duration: speed * 2000, state: { flag: { to: 2 } } }]}
+      track={[
+        { duration: speed ? 2000 / speed : 2000, state: { flag: { to: 2 } } }
+      ]}
       value={tick}
       onTick={({ value }) => setTick(value)}
       onUpdate={({ state }) => {

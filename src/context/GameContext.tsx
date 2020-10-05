@@ -11,7 +11,7 @@ import {
 } from "../types/game";
 import { XYCoord } from "react-dnd";
 import { checkCascadeKeyMatch, getCascadeView } from "../utils/gameUtils";
-import { useLevelManager } from "../hooks/gameControls";
+import { useLevelManager, useWatchMatch } from "../hooks/gameControls";
 
 export interface GameContextProps {
   boardCells: CellData[];
@@ -27,6 +27,7 @@ export interface GameContextProps {
   key: CascadeCellData[];
   cascadeView: CascadeCellData[];
   cascadeMatchesKey: boolean;
+  loopSpeed: number;
 }
 
 export const GameContext = React.createContext<GameContextProps>({
@@ -39,7 +40,8 @@ export const GameContext = React.createContext<GameContextProps>({
   availableSlots: [],
   key: [],
   cascadeView: [],
-  cascadeMatchesKey: false
+  cascadeMatchesKey: false,
+  loopSpeed: 0
 });
 
 export const GameContextProvider: React.FC = props => {
@@ -47,7 +49,16 @@ export const GameContextProvider: React.FC = props => {
   const [pieces, setPieces] = React.useState<PieceData[]>([]);
   const [key, setKey] = React.useState<CascadeCellData[]>([]);
 
-  const { goToNextLevel } = useLevelManager(setBoardCells, setPieces, setKey);
+  const onGameEnd = () => {
+    alert("Thank you for playing!");
+  };
+
+  const { goToNextLevel, loopSpeed, setLoopSpeed } = useLevelManager(
+    setBoardCells,
+    setPieces,
+    setKey,
+    onGameEnd
+  );
 
   const [windowPos, setWindowPos] = React.useState<XYCoord>();
   const [draggingPiece, setDraggingPiece] = React.useState<PieceData>();
@@ -69,6 +80,8 @@ export const GameContextProvider: React.FC = props => {
     return checkCascadeKeyMatch(cascadeView, key);
   }, [cascadeView, key]);
 
+  useWatchMatch(cascadeMatchesKey, setLoopSpeed, goToNextLevel);
+
   return (
     <GameContext.Provider
       value={{
@@ -84,7 +97,8 @@ export const GameContextProvider: React.FC = props => {
         availableSlots,
         key,
         cascadeView,
-        cascadeMatchesKey
+        cascadeMatchesKey,
+        loopSpeed
       }}
     >
       {props.children}

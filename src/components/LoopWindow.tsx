@@ -1,5 +1,5 @@
 import React from "react";
-import { CELL_WIDTH, COLUMN_HEIGHT, ROW_LENGTH } from "../constants";
+import { CELL_WIDTH, COLUMN_HEIGHT, ROW_LENGTH, SHOW_GRID } from "../constants";
 import Cell from "./Cell";
 import CellLayer from "./CellLayer";
 import PieceLayer from "./PieceLayer";
@@ -32,13 +32,15 @@ const LoopWindow: React.FC<LoopWindowProps> = props => {
     ({ slot }) => (
       <Cell
         slot={slot}
-        // showLabel
-        // style={{
-        //   borderWidth: 1,
-        //   borderColor: "text",
-        //   borderStyle: "dashed",
-        //   opacity: 0.5
-        // }}
+        showLabel={SHOW_GRID}
+        style={
+          SHOW_GRID && {
+            borderWidth: 1,
+            borderColor: "text",
+            borderStyle: "dashed",
+            opacity: 0.5
+          }
+        }
       />
     ),
     []

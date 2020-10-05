@@ -73,5 +73,5 @@ export const checkCascadeKeyMatch = (
   cascade: CascadeCellData[],
   key: CascadeCellData[]
 ) => {
-  return _isEqual(cascade, key);
+  return !!(cascade.length && key.length) && _isEqual(cascade, key);
 };
