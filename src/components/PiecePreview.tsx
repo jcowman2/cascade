@@ -19,7 +19,15 @@ const PiecePreview: React.FC<PiecePreviewProps> = props => {
   const { piece, offset } = props;
   const { slots } = piece;
 
-  const cells = React.useMemo(() => slots.map(slot => ({ slot })), [slots]);
+  const cells = React.useMemo(() => {
+    try {
+      return slots.map(slot => ({ slot }));
+    } catch (err) {
+      console.error("PiecePreview error", err);
+      console.log({ slots });
+    }
+    return [];
+  }, [slots]);
   const getKind = React.useCallback(() => piece.kind, [piece]);
   const renderCell = usePieceCellPainter(getKind);
 

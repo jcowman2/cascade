@@ -46,7 +46,7 @@ const Stripes = {
     },
     {
       id: 1,
-      slots: [9, 10, 11, 20, 21, 22, 29, 30, 31],
+      slots: [9, 10, 11, 20, 21, 22, 31, 32, 33],
       kind: GameColors.text
     }
   ],
